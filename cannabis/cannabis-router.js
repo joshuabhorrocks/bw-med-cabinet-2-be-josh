@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require("axios");
 
-const Cannabis = require('./cannabis-model');
+const Cannabis = require('../users/user-model');
 
 const router = express.Router();
 
@@ -12,6 +12,7 @@ router.get("/", (req, res) => {
     res.status(200).json(response)
   })
   .catch(err => {
+    console.log(err)
     res.status(500).json({message: "Error fetching strains", error: err});
   });
 });

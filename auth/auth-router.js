@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 
 const router = require("express").Router();
 
-const Users = require("../routes/cannabis-model.js");
-const { isValid } = require("../routes/user-service.js");
+const Users = require("../users/user-model.js");
+const { isValid } = require("../users/user-service.js");
 
 router.post("/register", (req, res) => {
   const credentials = req.body;
