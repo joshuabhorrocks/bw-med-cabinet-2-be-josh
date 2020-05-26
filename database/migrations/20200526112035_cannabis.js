@@ -9,7 +9,7 @@ exports.up = function(knex) {
         strains.increments();
             
         strains.string("name", 255).notNullable().unique();
-        strains.string("description", 255).notNullable().unique();
+        strains.string("description", 555).notNullable().unique();
         strains.string("flavors", 255).notNullable();
         strains.string("effects", 255).notNullable();
     })
