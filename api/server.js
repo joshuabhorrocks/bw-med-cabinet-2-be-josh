@@ -13,6 +13,10 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/', authRouter); // signup and login
-server.use('/api/user', authenticate, userRouter); //
+server.use('/api/user', authenticate, userRouter);
+
+server.use("/", (req, res) => {
+    return res.status(200).json({message: "Server is up"})
+})
 
 module.exports = server;
