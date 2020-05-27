@@ -5,20 +5,31 @@ const Users = require('../users/user-model');
 
 const router = express.Router();
 
-router.post("/recommendations", (req, res) => {
-    const preferenceData = req.body;
-    axios.post("https://weed-data-bw.herokuapp.com/web_layout_strains", preferenceData)
-    .then(response => {
-        console.log(response)
-        db("users as u").insert(response).select("u.recommendations").where("id", "=", "u.id")
-        res.status(200).json(response)
+router.get("/:id", (req, res) => {
+    Users.findById(req.params.id)
+    .then(user => {
+        res.status(200).json(user)
     })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({message: "Error fetching recommendations", error: err});
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({message: "Error retrieving the user"})
     });
 });
 
-router.put()
+router.post("/recommendations", (req, res) => {
+    const preferences = req.body;
+
+    Users.getRecs(preferences)
+    .then(recs => {
+        res.status(200).json(recs);
+    })
+})
+
+router.put("/:id", (req, res) => {
+    Users.findById(req.params.id)
+    .then(user => {
+
+    })
+})
 
 module.exports = router;
