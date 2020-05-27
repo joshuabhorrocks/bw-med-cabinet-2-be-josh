@@ -6,19 +6,21 @@ exports.up = function(knex) {
     users.string("password", 255).notNullable();
     users.string("recommendations", 255);
     })
+
     .createTable("effects", effects => {
-    effects.increments();
+      effects.increments();
 
-    effects.string("effect", 255).notNullable();
+      effects.string("effect", 255).notNullable();
 
-    effects.integer("user_id")
-    .unsigned()
-    .notNullable()
-    .references("id")
-    .inTable("users")
-    .onUpdate("CASCADE")
-    .onDelete("CASCADE")
+      effects.integer("user_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("users")
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE")
     })
+
     .createTable("flavors", flavors => {
       flavors.increments();
   
@@ -35,7 +37,8 @@ exports.up = function(knex) {
 };
 
   exports.down = function(knex) {
-    return knex.schema.dropTableIfExists("users")
-    .dropTableIfExists("effects")
+    return knex.schema
     .dropTableIfExists("flavors")
+    .dropTableIfExists("effects")
+    .dropTableIfExists("users")
   };
