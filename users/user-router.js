@@ -15,23 +15,10 @@ router.post("/recommendations", (req, res) => {
     })
     .catch(err => {
         console.log(err)
-        res.status(500).json({message: "Error fetching strains", error: err});
+        res.status(500).json({message: "Error fetching recommendations", error: err});
     });
-})
+});
 
-// router.post('/', (req, res) => {
-//     const preferenceData = req.body;
-  
-//     DB.newProject(preferenceData)
-//     .then(recommendations => {
-//       res.status(201).json(recommendations);
-//     })
-//     .catch (err => {
-//       console.log(err)  
-//       res.status(500).json({ message: 'Failed to create new project' });
-//     });
-// });
+router.put()
 
 module.exports = router;
-
-;
