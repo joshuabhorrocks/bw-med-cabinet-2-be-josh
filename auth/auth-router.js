@@ -20,9 +20,7 @@ router.post("/register", (req, res) => {
     // save the user to the database
     Users.add(credentials)
       .then(user => {
-        const token = createToken(user);
-
-        res.status(201).json({user, token});
+        res.status(201).json({message: "You have successfully registered"})
       })
       .catch(error => {
         res.status(500).json({ message: error.message });
@@ -44,10 +42,9 @@ router.post("/login", (req, res) => {
         if (user && bcryptjs.compareSync(password, user.password)) {
           // produce (sign) and send the token
           const token = createToken(user);
-          const preferences = user.preferences;
-          const recommendations = user.recommendations;
+          const id = user.id;
 
-          res.status(200).json({message: "Welcome to our API", preferences, recommendations, token});
+          res.status(200).json({id, token});
         } else {
           res.status(401).json({message: "Invalid credentials"});
         }
@@ -66,8 +63,7 @@ function createToken(user) {
   const payload = {
     sub: user.id,
     username: user.username,
-    role: user.role
-    // prefence check might be here
+    preferences: user.preferences
 };
 
 const secret = process.env.JWT_SECRET || "thesecretsauce";
