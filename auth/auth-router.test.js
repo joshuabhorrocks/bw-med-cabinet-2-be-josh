@@ -17,7 +17,7 @@ describe("users", () => {
             return (
                 supertest(server)
                 .post("/api/register")
-                .send({username: null, password: null})
+                .send({username: null, password: null, email: null})
                 .then(response => {
                     expect(response.status).toBe(400);
                 })
@@ -30,7 +30,7 @@ describe("users", () => {
             return (
                 supertest(server)
                 .post("/api/register")
-                .send({username: "testinguser", password: "testingpassword"})
+                .send({username: "testinguser", password: "testingpassword", email: "testing@email.com"})
                 .then(response => {
                     expect(response.status).toBe(201);
                 })
@@ -43,7 +43,7 @@ describe("users", () => {
             return (
                 supertest(server)
                 .post("/api/login")
-                .send({username: "testuser", password: "sbasdjflhas"})
+                .send({username: "testuser", password: "sbasdjflhas", email: "sasdfa@sadgfsggh.com"})
                 .then(response => {
                     expect(response.status).toBe(401);
                 })
@@ -56,7 +56,7 @@ describe("users", () => {
             return (
                 supertest(server)
                 .post("/api/login")
-                .send({username: "testuser", password: "testpassword"})
+                .send({username: "testinguser", password: "testingpassword", email: "testing@email.com"})
                 .then(response => {
                     expect(response.status).toBe(401);
                 })

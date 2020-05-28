@@ -20,7 +20,9 @@ router.post("/register", (req, res) => {
     // save the user to the database
     Users.add(credentials)
       .then(user => {
-        res.status(201).json({message: "You have successfully registered"})
+        const token = createToken(user);
+
+        res.status(201).json({message: "You have successfully registered", token})
       })
       .catch(error => {
         res.status(500).json({ message: error.message });
