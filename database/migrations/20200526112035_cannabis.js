@@ -11,7 +11,7 @@ exports.up = function(knex) {
     .createTable("effects", effects => {
       effects.increments();
 
-      effects.string("effect", 255).notNullable();
+      effects.string("effects", 255).notNullable();
 
       effects.integer("user_id")
       .unsigned()

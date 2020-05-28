@@ -41,7 +41,7 @@ router.put("/:id", (req, res) => {
         }
     })
     .catch(error => {
-        res.status(500).json({message: "500 error but it updated"})
+        res.status(500).json({message: "500 error but it updated successfully -shrug emoji-"})
     })
 });
 
