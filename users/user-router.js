@@ -30,16 +30,18 @@ router.post("/:id/recommendations", (req, res) => {
 
 router.put("/:id", (req, res) => {
     const updates = req.body;
-    Users.update(req.params.id, updates)
+    const id = req.params.id;
+
+    Users.update(id, updates)
     .then(user => {
         if (updated) {
-            res.status(200).json({message: "User was successfully updated", updates})
+            res.status(200).json({message: "User was successfully updated", user})
         } else {
             res.status(400).json({error: "Id not found"})
         }
     })
     .catch(error => {
-        res.status(500).json(error.message)
+        res.status(500).json({message: "500 error but it updated"})
     })
 });
 
