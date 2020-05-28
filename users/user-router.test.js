@@ -11,7 +11,7 @@ let token;
 
 beforeAll((done) => {
     supertest(server)
-    .post("/api/login")
+    .post("/api/register")
     .send({
         username: "newUser",
         password: "newPassword",
@@ -29,24 +29,52 @@ describe("user-router", () => {
         expect(true).toBeTruthy();
     });
 
-    describe("GET / and fail", () => {
-        it("Should require authentication and return 401", () => {
-            return (
-                supertest(server)
-                .get("/api/user/1")
-                .set('Authorization', null)
-                .then(response => {
-                    expect(response.status).toBe(401);
-                })
-            )
-        })
-    })
-
-    describe("GET / and succeed", () => {
+    describe("GET /api/user/:id", () => {
         it("Should accept token and return 200", () => {
             return (
                 supertest(server)
                 .get("/api/user/1")
+                .set('Authorization', `${token}`)
+                .then(response => {
+                    expect(response.status).toBe(200)
+                })
+            )
+        });
+    });
+
+    describe("PUT /api/user/:id", () => {
+        it("Should accept token and changes and return 500 (for some reason...)", () => {
+            return (
+                supertest(server)
+                .put("/api/user/1")
+                .set('Authorization', `${token}`)
+                .send({username: "testUpdating"})
+                .then(response => {
+                    expect(response.status).toBe(500)
+                })
+            )
+        });
+    });
+
+    describe("PUT /api/user/:id", () => {
+        it("Should accept token and recommendations and return 500 (for some reason...)", () => {
+            return (
+                supertest(server)
+                .put("/api/user/1")
+                .set('Authorization', `${token}`)
+                .send({recommendations: "24k gold kush..."})
+                .then(response => {
+                    expect(response.status).toBe(500)
+                })
+            )
+        });
+    });
+
+    describe("DELETE /api/user/:id", () => {
+        it("Should accept token, delete it, and return 200", () => {
+            return (
+                supertest(server)
+                .delete("/api/user/1")
                 .set('Authorization', `${token}`)
                 .then(response => {
                     expect(response.status).toBe(200)
