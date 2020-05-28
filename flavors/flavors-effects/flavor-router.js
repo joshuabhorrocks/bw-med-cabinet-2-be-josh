@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/:id/flavors", (req, res) => {
     Flavors.findFlavById(req.params.id)
     .then(flavors => {
-        console.log(flavors)
+        // console.log(flavors)
         res.status(200).json(flavors)
     })
     .catch(error => {
@@ -17,11 +17,11 @@ router.get("/:id/flavors", (req, res) => {
 });
 
 router.post("/:id/flavors", (req, res) => {
-    const flavors = req.body;
+    const newFlav = req.body;
 
-    Flavors.addFlav(flavors)
-    .then(newFlavs => {
-        console.log(newFlavs)
+    Flavors.addFlav(newFlav)
+    .then(flavors => {
+        // console.log(flavors)
         res.status(200).json({message: "Added flavor(s) successfully"});
     })
     .catch(error => {

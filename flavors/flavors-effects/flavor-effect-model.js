@@ -21,8 +21,8 @@ function getFlav(id) {
     return findFlavById(id)
 }
 
-async function addFlav(flavor) {
-  const [id] = await db("flavors").insert(flavor, "flavors.user_id");
+async function addFlav(newFlav) {
+  const [id] = await db("flavors").insert(newFlav, "flavors.user_id");
 
   return findFlavById(id);
 }

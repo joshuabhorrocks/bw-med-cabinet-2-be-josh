@@ -1,8 +1,6 @@
 const db = require("../database/dbConfig");
-const axios = require("axios");
 
 module.exports = {
-  getRecs,
   add,
   update,
   remove,
@@ -10,14 +8,6 @@ module.exports = {
   findBy,
   findById,
 };
-
-async function getRecs(preferences, id) {
-  try {
-    return axios.post("https://weed-data-bw.herokuapp.com/dummy_model", preferences)
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 function find() {
   return db("users").select("id", "username");
