@@ -11,7 +11,7 @@ module.exports = {
   findById,
 };
 
-async function getRecs(preferences) {
+async function getRecs(preferences, id) {
   try {
     return axios.post("https://weed-data-bw.herokuapp.com/dummy_model", preferences)
   } catch (error) {
@@ -38,12 +38,12 @@ function findById(id) {
 }
 
 function update(id, changes) {
-  return db('actions')
+  return db('users')
     .where('id', id)
     .update(changes)
     .then((count) => (count > 0 ? get(id) : null));
 }
 
 function remove(id) {
-  return db('actions').where('id', id).del();
+  return db('users').where('id', id).del();
 }
