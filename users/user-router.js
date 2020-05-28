@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require("axios");
 
 const Users = require('../users/user-model');
 
@@ -14,18 +13,6 @@ router.get("/:id", (req, res) => {
         console.log(error);
         res.status(500).json({message: "Error retrieving the user"})
     });
-});
-
-router.post("/:id/recommendations", (req, res) => {
-    const preferences = req.body;
-
-    Users.getRecs(preferences)
-    .then(recs => {
-        res.status(200).json(recs);
-    })
-    .catch(error => {
-        res.status(500).json(error)
-    })
 });
 
 router.put("/:id", (req, res) => {
@@ -55,6 +42,6 @@ router.delete("/:id", (req, res) => {
         console.log(error);
         res.status(500).json({message: "Failed to delete user"})
     })
-})
+});
 
 module.exports = router;

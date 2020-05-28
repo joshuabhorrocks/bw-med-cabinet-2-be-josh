@@ -25,7 +25,7 @@ exports.up = function(knex) {
     .createTable("flavors", flavors => {
       flavors.increments();
   
-      flavors.string("flavor", 255).notNullable();
+      flavors.string("flavors", 255).notNullable();
   
       flavors.integer("user_id")
       .unsigned()
