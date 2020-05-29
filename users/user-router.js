@@ -16,7 +16,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-    const updates = JSON.stringify(req.body);
+    const updates = req.body;
     const id = req.params.id;
 
     Users.update(id, updates)
@@ -24,7 +24,7 @@ router.put("/:id", (req, res) => {
         res.status(200).json({message: "User was successfully updated", user})
     })
     .catch(error => {
-        res.status(500).json({message: "500 error but it updated successfully -shrug emoji-"})
+        res.status(500).json({message: "There was a problem updating"})
     });
 });
 

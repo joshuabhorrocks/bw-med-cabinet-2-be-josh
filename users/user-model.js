@@ -27,13 +27,13 @@ function findById(id) {
   return db("users").where({id}).first();
 }
 
-function update(id, updates) {
+function update(id, changes) {
   return db('users')
     .where('id', id)
-    .update(updates)
+    .update(changes)
     .then(user => {
       return findById(id)
-    });
+  });
 }
 
 function remove(id) {
