@@ -27,10 +27,10 @@ function findById(id) {
   return db("users").where({id}).first();
 }
 
-function update(id, changes) {
+function update(id, updates) {
   return db('users')
     .where('id', id)
-    .update(changes)
+    .update(updates)
     .then(user => {
       return findById(id)
     });

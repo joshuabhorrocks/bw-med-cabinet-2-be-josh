@@ -16,20 +16,16 @@ router.get("/:id", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-    const updates = req.body;
+    const updates = JSON.stringify(req.body);
     const id = req.params.id;
 
     Users.update(id, updates)
     .then(user => {
-        if (updated) {
-            res.status(200).json({message: "User was successfully updated", user})
-        } else {
-            res.status(400).json({error: "Id not found"})
-        }
+        res.status(200).json({message: "User was successfully updated", user})
     })
     .catch(error => {
         res.status(500).json({message: "500 error but it updated successfully -shrug emoji-"})
-    })
+    });
 });
 
 router.delete("/:id", (req, res) => {
